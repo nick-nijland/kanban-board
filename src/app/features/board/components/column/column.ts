@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import {Card} from '../card/card';
 
 @Component({
   selector: 'app-column',
-  imports: [],
+  imports: [
+    Card
+  ],
   templateUrl: './column.html',
   styleUrl: './column.scss',
 })

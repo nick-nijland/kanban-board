@@ -6,7 +6,6 @@ import {Card} from './components/card/card';
   selector: 'app-board-page',
   imports: [
     Column,
-    Card
   ],
   templateUrl: './board.page.html',
   styleUrl: './board.page.scss',

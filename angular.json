@@ -28,7 +28,9 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "src/assets",
+              "src/mockServiceWorker.js"
             ],
             "styles": [
               "src/styles.scss"

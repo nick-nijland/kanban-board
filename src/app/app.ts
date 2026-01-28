@@ -1,6 +1,7 @@
 import {Component, OnInit, signal} from '@angular/core';
 import {BoardPage} from './features/board/board.page';
 import {HttpClient} from '@angular/common/http';
+import {Card} from './shared/models/card';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +17,10 @@ export class App implements OnInit {
   constructor(private http: HttpClient) {}
 
   public ngOnInit(): void {
-    this.http.get<any>('/api/users').subscribe((users: any) => {
-      console.log(users);
+    this.http.get<Card[]>('/api/tickets').subscribe(tickets => {
+      console.warn(tickets);
     });
-  }
+  };
+
 }
+

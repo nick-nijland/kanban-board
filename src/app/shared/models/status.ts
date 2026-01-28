@@ -1,5 +1,1 @@
-export interface Status {
-  name: string;
-  color: string;
-  total: number;
-}
+export type Status = 'TODO' | 'IN_PROGRESS' | 'DONE';

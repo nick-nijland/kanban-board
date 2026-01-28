@@ -1,26 +1,14 @@
-import {Component, OnInit, signal} from '@angular/core';
-import {BoardPage} from './features/board/board.page';
-import {HttpClient} from '@angular/common/http';
-import {Card} from './shared/models/card';
+import {Component} from '@angular/core';
+import {BoardStore} from './features/board/store/board.store';
+import {RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [
-    BoardPage
-  ],
+  imports: [RouterOutlet],
+  providers: [BoardStore],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App implements OnInit {
-  protected readonly title = signal('kanban-board');
-
-  constructor(private http: HttpClient) {}
-
-  public ngOnInit(): void {
-    this.http.get<Card[]>('/api/tickets').subscribe(tickets => {
-      console.warn(tickets);
-    });
-  };
-
+export class App {
 }
 

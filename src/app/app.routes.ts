@@ -1,3 +1,8 @@
 import { Routes } from '@angular/router';
+import {BoardPage} from './features/board/board.page';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+  { path: '', component: BoardPage },
+  { path: 'board', component: BoardPage },
+  { path: '**', redirectTo: '' }
+];

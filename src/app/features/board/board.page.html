@@ -1,7 +1,10 @@
 <h1>Taken</h1>
 
 <section>
-  <app-column></app-column>
-  <app-column></app-column>
-  <app-column></app-column>
+  @for (status of statuses; track status) {
+    <app-column
+      [status]="status"
+      [cards]="getCardsByStatus(status)"
+    ></app-column>
+  }
 </section>

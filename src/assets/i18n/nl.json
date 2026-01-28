@@ -1,0 +1,9 @@
+{
+  "board": {
+    "status": {
+      "todo": "Te doen",
+      "inProgress": "Bezig",
+      "done": "Klaar"
+    }
+  }
+}

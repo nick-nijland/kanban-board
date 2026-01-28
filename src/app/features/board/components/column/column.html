@@ -1,1 +1,4 @@
-<app-card></app-card>
+{{ statusI18nKey() }}
+@for (card of cards(); track card) {
+  <app-ticket [card]="card"></app-ticket>
+}

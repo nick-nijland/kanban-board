@@ -1,18 +1,30 @@
-import {Component, computed, input} from '@angular/core';
-import {Status, STATUS_I18N_KEYS, statuses} from '../../../../shared/models/status';
+import {Component, computed, input, output, Output} from '@angular/core';
+import {Status, statuses} from '../../../../shared/models/status';
 import {Card} from '../../../../shared/models/card';
-import {Ticket} from '../card/ticket';
+import {Ticket} from '../ticket/ticket';
+import {CdkDrag, CdkDragDrop, CdkDropList} from '@angular/cdk/drag-drop';
+import EventEmitter = require('node:events');
 
 @Component({
   selector: 'app-column',
-  imports: [Ticket],
+  imports: [Ticket, CdkDrag, CdkDropList],
   templateUrl: './column.html',
   styleUrl: './column.scss',
 })
 export class Column {
+  public cardDropped = output<CdkDragDrop<Card[]>>();
+
   public status = input.required<Status>();
   public cards = input.required<Card[]>();
-  public statusI18nKey = computed(() => STATUS_I18N_KEYS[this.status()]);
+  public connectedTo = input.required<Status[]>();
 
-  protected readonly statuses = statuses;
+  public idPrefix = 'cdk-drop-list-';
+
+  public onDrop(event: CdkDragDrop<Card[]>) {
+    this.cardDropped.emit(event);
+  }
+
+  public getConnectedTo(): string[] {
+    return this.connectedTo().map(status => this.idPrefix + status);
+  }
 }

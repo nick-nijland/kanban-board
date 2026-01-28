@@ -52,5 +52,10 @@ export const BoardStore = signalStore(
     getCardsByStatus: (status: Status): Card[] => {
       return store.cards().filter(card => card.status === status);
     },
+    updateCardOrder(status: Status, cards: Card[]) {
+      const otherCards = store.cards().filter(c => c.status !== status);
+      const allCards= [...otherCards, ...cards];
+      patchState(store, { cards: allCards })
+    }
   }))
 );

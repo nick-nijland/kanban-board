@@ -1,4 +1,14 @@
-{{ statusI18nKey() }}
-@for (card of cards(); track card) {
-  <app-ticket [card]="card"></app-ticket>
-}
+<div
+  class="column"
+  cdkDropList
+  [id]="idPrefix + status()"
+  [cdkDropListData]="cards()"
+  [cdkDropListConnectedTo]="getConnectedTo()"
+  (cdkDropListDropped)="onDrop($event)">
+  @for (card of cards(); track card) {
+    <app-ticket
+      cdkDrag
+      [card]="card"
+    ></app-ticket>
+  }
+</div>

@@ -5,6 +5,8 @@
     <app-column
       [status]="status"
       [cards]="getCardsByStatus(status)"
+      [connectedTo]="getStatusses(status)"
+      (cardDropped)="dropCard($event, status)"
     ></app-column>
   }
 </section>

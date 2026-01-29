@@ -1,0 +1,15 @@
+{
+  "test": "Testing123",
+  "generic": {
+    "add": "Voeg toe",
+    "open": "Bekijk"
+  },
+  "board": {
+    "title": "Taken",
+    "status": {
+      "todo": "Te doen",
+      "in_progress": "Bezig",
+      "done": "Klaar"
+    }
+  }
+}

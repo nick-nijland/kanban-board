@@ -3,10 +3,11 @@ import {Button} from "../../../../../shared/components/button/button";
 import {Status} from '../../../../../shared/models/status';
 import {MatChip, MatChipSet} from '@angular/material/chips';
 import {KeyValuePipe} from '@angular/common';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
-  imports: [Button, MatChipSet, MatChip, KeyValuePipe],
+  imports: [Button, MatChipSet, MatChip, KeyValuePipe, TranslatePipe],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })

@@ -4,10 +4,11 @@ import {Card} from '../../../../shared/models/card';
 import {Ticket} from '../ticket/ticket';
 import {CdkDrag, CdkDragDrop, CdkDropList} from '@angular/cdk/drag-drop';
 import EventEmitter = require('node:events');
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-column',
-  imports: [Ticket, CdkDrag, CdkDropList],
+  imports: [Ticket, CdkDrag, CdkDropList, TranslatePipe],
   templateUrl: './column.html',
   styleUrl: './column.scss',
 })

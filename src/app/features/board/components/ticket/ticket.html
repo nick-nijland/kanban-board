@@ -4,7 +4,7 @@
     <mat-card-subtitle>{{ card().description }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-actions>
-    <button matButton>Bekijk</button>
+    <button matButton>{{ 'generic.open' | translate }}</button>
     <button matButton [matMenuTriggerFor]="menu">Verplaats</button>
     <mat-menu #menu="matMenu" yPosition="above">
       <button mat-menu-item>Item 1</button>

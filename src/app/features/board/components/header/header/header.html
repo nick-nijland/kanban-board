@@ -1,11 +1,11 @@
-<h1>Taken</h1>
+<h1>{{ 'board.title' | translate }}</h1>
 
 <mat-chip-set aria-label="Status">
   @for (status of statuses() | keyvalue; track status) {
   <mat-chip aria-label="Status">
-    {{ status.key }} <span>{{ status.value }}</span>
+    {{ 'board.status.' + status.key.toLocaleLowerCase() | translate }} <span>{{ status.value }}</span>
   </mat-chip>
   }
 </mat-chip-set>
 
-<app-button [text]="'Voeg toe'" [disabled]="false" (click)="onCreateTicket.emit()"></app-button>
+<app-button [text]="'generic.add' | translate" [disabled]="false" (click)="onCreateTicket.emit()"></app-button>

@@ -6,7 +6,7 @@
   [cdkDropListConnectedTo]="getConnectedTo()"
   (cdkDropListDropped)="onDrop($event)">
 
-  <span>{{ status() }} {{ cards().length }}</span>
+  <h3>{{ 'board.status.' + status().toLocaleLowerCase() | translate }} {{ cards().length }}</h3>
 
   @for (card of cards(); track card) {
     <app-ticket

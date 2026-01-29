@@ -1,10 +1,9 @@
 <h1>{{ 'board.title' | translate }}</h1>
 
 <mat-chip-set aria-label="Status">
-  @for (status of statuses(); track status) {
-    <mat-chip aria-label="Status">
-      {{ 'board.status.' + status.status.toLowerCase() | translate }}
-      <span>{{ status.total }}</span>
+  @for (status of statuses(); track status.status) {
+    <mat-chip aria-label="Status" [class]="status.status">
+      {{ 'board.status.' + status.status | translate }} {{ status.total }}
     </mat-chip>
   }
 </mat-chip-set>

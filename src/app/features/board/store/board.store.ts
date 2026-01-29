@@ -33,7 +33,7 @@ export const BoardStore = signalStore(
     cardCount: computed(() => cards().length),
     statusTotals: computed<StatusTotal[]>(() => {
       return statuses.map(status => ({
-        status,
+        status: status.toLocaleLowerCase(),
         total: cards().filter(card => card.status === status).length,
       }));
     }),

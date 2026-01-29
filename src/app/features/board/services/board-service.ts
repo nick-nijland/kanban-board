@@ -16,7 +16,6 @@ export class BoardService {
   }
 
   public createCard(card: NewCard): Observable<Card> {
-    console.warn(card)
     return this.http.post<Card>(this.apiUrl, card);
   }
 

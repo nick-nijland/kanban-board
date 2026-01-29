@@ -5,6 +5,9 @@
   [cdkDropListData]="cards()"
   [cdkDropListConnectedTo]="getConnectedTo()"
   (cdkDropListDropped)="onDrop($event)">
+
+  <span>{{ status() }} {{ cards().length }}</span>
+
   @for (card of cards(); track card) {
     <app-ticket
       cdkDrag

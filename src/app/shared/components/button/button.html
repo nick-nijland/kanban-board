@@ -1,1 +1,1 @@
-<button matButton="filled">{{ text() }}</button>
+<button matButton="filled" [disabled]="disabled()" (click)="clicked.emit()">{{ text() }}</button>

@@ -1,5 +1,5 @@
 import { http, HttpResponse } from 'msw';
-import {Card} from "../app/shared/models/card";
+import {Card, NewCard} from "../app/shared/models/card";
 import cards from './cards.json';
 
 export const handlers = [
@@ -7,13 +7,16 @@ export const handlers = [
       return HttpResponse.json<Card[]>(cards as Card[]);
     }),
 
-    // http.post('/api/login', async ({ request }) => {
-    //     const body = await request.json();
-    //
-    //     if (body.username === 'admin') {
-    //         return HttpResponse.json({ token: 'fake-jwt-token' });
-    //     }
-    //
-    //     return new HttpResponse('Unauthorized', { status: 401 });
-    // }),
+
+  http.post('/api/tickets', async ({ request }) => {
+    const newCard = (await request.json()) as NewCard;
+    const card: Card = {
+      title: newCard.title,
+      description: newCard.description,
+      status: "TODO",
+      id: cards.length > 0 ? Math.max(...cards.map(c => c.id)) + 1 : 1, // Usually a BE will determine this, but for this assesment we're mocking.
+    }
+    return HttpResponse.json<Card>(card, { status: 201 });
+  })
+
 ];

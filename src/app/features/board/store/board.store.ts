@@ -12,7 +12,7 @@ import {
   withState,
 } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import {Card} from '../../../shared/models/card';
+import {Card, NewCard} from '../../../shared/models/card';
 import {BoardService} from '../services/board-service';
 import {tapResponse} from '@ngrx/operators';
 import {Status} from '../../../shared/models/status';
@@ -49,8 +49,28 @@ export const BoardStore = signalStore(
         })
       )
     ),
+    createCard: rxMethod<NewCard>(
+      (newCard$) =>
+        newCard$.pipe(
+          tap(() => patchState(store, { isLoading: true })),
+          switchMap((newCard) =>
+            boardService.createCard(newCard).pipe(
+              tapResponse({
+                next: (card) => {
+                  patchState(store, { cards: [...store.cards(), card] });
+                },
+                error: console.error,
+                finalize: () => patchState(store, { isLoading: false }),
+              })
+            )
+          )
+        )
+    ),
     getCardsByStatus: (status: Status): Card[] => {
       return store.cards().filter(card => card.status === status);
+    },
+    getCardCountByStatus: (status: Status): number => {
+      return store.cards().filter(card => card.status === status).length;
     },
     updateCardOrder(status: Status, cards: Card[]) {
       const otherCards = store.cards().filter(c => c.status !== status);

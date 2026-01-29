@@ -2,19 +2,25 @@ import {Component, inject} from '@angular/core';
 import {Column} from './components/column/column';
 import {BoardStore} from './store/board.store';
 import {Status, statuses} from '../../shared/models/status';
-import {Card} from '../../shared/models/card';
-import {CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {Card, NewCard} from '../../shared/models/card';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {Header} from './components/header/header/header';
+import { MatDialog } from '@angular/material/dialog';
+import {CreateModal} from './components/create-modal/create-modal';
 
 @Component({
   selector: 'app-board-page',
   imports: [
-    Column
+    Column,
+    Header
   ],
   templateUrl: './board.page.html',
   styleUrl: './board.page.scss',
 })
 export class BoardPage {
   public readonly store = inject(BoardStore);
+  public readonly dialog = inject(MatDialog);
+  public loading = this.store.isLoading;
 
   constructor() {
     this.store.loadAll();
@@ -22,6 +28,10 @@ export class BoardPage {
 
   public getCardsByStatus(status: Status): Card[] {
     return this.store.getCardsByStatus(status);
+  }
+
+  public getCardCountByStatus(status: Status): number {
+    return this.store.getCardCountByStatus(status);
   }
 
   public getStatusses(status: Status): Status[] {
@@ -48,6 +58,18 @@ export class BoardPage {
     }
   }
 
+  public createNewTicket(): void {
+    const dialogRef = this.dialog.open(CreateModal, {
+      width: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe((result: NewCard | undefined) => {
+      if (result) {
+        this.store.createCard(result)
+      }
+    });
+
+  }
 
   protected readonly statuses = statuses;
 }

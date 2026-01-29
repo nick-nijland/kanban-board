@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>Nieuw ticket</h2>
+<mat-dialog-content>
+  <form [formGroup]="form">
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" />
+      @if (form.controls.title.invalid) {
+      <mat-error>
+        Titel is verplicht
+      </mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        rows="4"
+        formControlName="description"
+      ></textarea>
+      @if (form.controls.description.invalid) {
+        <mat-error>
+          Omschrijving is verplicht
+        </mat-error>
+      }
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <app-button
+    mat-dialog-close
+    [disabled]="false"
+    [text]="'Annuleren'"
+  ></app-button>
+  <app-button
+    (clicked)="createItem()"
+    [disabled]="form.invalid"
+    [text]="'Voeg toe'"
+  ></app-button>
+</mat-dialog-actions>

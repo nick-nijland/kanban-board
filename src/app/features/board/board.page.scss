@@ -1,3 +1,10 @@
 section {
   display: flex;
+  justify-content: space-between;
+  background: white;
+}
+
+section > * {
+  width: 33%;
+  background: palegoldenrod;
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Card} from '../../../shared/models/card';
+import {Card, NewCard} from '../../../shared/models/card';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +13,11 @@ export class BoardService {
 
   public getCards(): Observable<Card[]> {
     return this.http.get<Card[]>(this.apiUrl);
+  }
+
+  public createCard(card: NewCard): Observable<Card> {
+    console.warn(card)
+    return this.http.post<Card>(this.apiUrl, card);
   }
 
 }

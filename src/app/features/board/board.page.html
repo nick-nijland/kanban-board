@@ -1,12 +1,19 @@
-<h1>Taken</h1>
+@if (loading()) {
+  loading spinner
+} @else {
+  <app-header
+    (onCreateTicket)="createNewTicket()"
+  >
+  </app-header>
 
-<section>
-  @for (status of statuses; track status) {
-    <app-column
-      [status]="status"
-      [cards]="getCardsByStatus(status)"
-      [connectedTo]="getStatusses(status)"
-      (cardDropped)="dropCard($event, status)"
-    ></app-column>
-  }
-</section>
+  <section>
+    @for (status of statuses; track status) {
+      <app-column
+        [status]="status"
+        [cards]="getCardsByStatus(status)"
+        [connectedTo]="getStatusses(status)"
+        (cardDropped)="dropCard($event, status)"
+      ></app-column>
+    }
+  </section>
+}

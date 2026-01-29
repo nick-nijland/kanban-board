@@ -3,6 +3,7 @@
 } @else {
   <app-header
     (onCreateTicket)="createNewTicket()"
+    [statuses]="getStatusTotals()"
   >
   </app-header>
 

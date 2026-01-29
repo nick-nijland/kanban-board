@@ -1,9 +1,11 @@
 <h1>Taken</h1>
 
-<!--@for (status of statuses; track status) {-->
-<!--  <mat-chip-set aria-label="Status">-->
-<!--    <mat-chip>{{ status }} <span>2</span></mat-chip>-->
-<!--  </mat-chip-set>-->
-<!--}-->
+<mat-chip-set aria-label="Status">
+  @for (status of statuses() | keyvalue; track status) {
+  <mat-chip aria-label="Status">
+    {{ status.key }} <span>{{ status.value }}</span>
+  </mat-chip>
+  }
+</mat-chip-set>
 
 <app-button [text]="'Voeg toe'" [disabled]="false" (click)="onCreateTicket.emit()"></app-button>

@@ -30,8 +30,8 @@ export class BoardPage {
     return this.store.getCardsByStatus(status);
   }
 
-  public getCardCountByStatus(status: Status): number {
-    return this.store.getCardCountByStatus(status);
+  public getStatusTotals(): Record<Status, number> {
+    return this.store.statusTotals();
   }
 
   public getStatusses(status: Status): Status[] {

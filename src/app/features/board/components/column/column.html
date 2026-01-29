@@ -11,7 +11,11 @@
   @for (card of cards(); track card) {
     <app-ticket
       cdkDrag
+      [statuses]="connectedTo()"
       [card]="card"
-    ></app-ticket>
+      (updateTicket)="onUpdateTicket.emit($event)"
+      (deleteTicket)="onDeleteTicket.emit($event)"
+    >
+    </app-ticket>
   }
 </div>

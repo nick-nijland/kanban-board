@@ -68,7 +68,14 @@ export class BoardPage {
         this.store.createCard(result)
       }
     });
+  }
 
+  public updateTicket(event: { card: Card }): void {
+    this.store.updateCard(event.card);
+  }
+
+  public deleteTicket(event: { card: Card }): void {
+    this.store.deleteCard(event.card);
   }
 
   protected readonly statuses = statuses;

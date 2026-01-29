@@ -4,12 +4,18 @@
     <mat-card-subtitle>{{ card().description }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-actions>
-    <button matButton>{{ 'generic.open' | translate }}</button>
-    <button matButton [matMenuTriggerFor]="menu">Verplaats</button>
+    <app-button [type]="'tonal'" [text]="'generic.open' | translate"></app-button>
+    <app-button [matMenuTriggerFor]="menu" [text]="'generic.move' | translate"></app-button>
     <mat-menu #menu="matMenu" yPosition="above">
-      <button mat-menu-item>Item 1</button>
-      <button mat-menu-item>Item 2</button>
+      @for (status of statuses(); track status) {
+      <button mat-menu-item (click)="updateTicketStatus(status)">
+        {{ 'board.status.' + status.toLocaleLowerCase() | translate }}
+      </button>
+      }
     </mat-menu>
+    <button (click)="deleteTicket.emit({ card: card() })" matIconButton aria-label="Delete ticket">
+      <mat-icon>delete</mat-icon>
+    </button>
   </mat-card-actions>
 </mat-card>
 <br>

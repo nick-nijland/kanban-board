@@ -3,7 +3,6 @@ import {Status, statuses} from '../../../../shared/models/status';
 import {Card} from '../../../../shared/models/card';
 import {Ticket} from '../ticket/ticket';
 import {CdkDrag, CdkDragDrop, CdkDropList} from '@angular/cdk/drag-drop';
-import EventEmitter = require('node:events');
 import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
@@ -14,6 +13,8 @@ import {TranslatePipe} from '@ngx-translate/core';
 })
 export class Column {
   public cardDropped = output<CdkDragDrop<Card[]>>();
+  public onUpdateTicket = output<{ card: Card }>();
+  public onDeleteTicket = output<{ card: Card }>();
 
   public status = input.required<Status>();
   public cards = input.required<Card[]>();

@@ -38,8 +38,9 @@ export const BoardStore = signalStore(
       }));
     }),
   })),
-  withMethods((store, boardService = inject(BoardService)) => ({
-    loadAll: rxMethod<void>(
+  withMethods((store, boardService = inject(BoardService)) => {
+
+    const loadAll = rxMethod<void>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(() => {
@@ -52,8 +53,9 @@ export const BoardStore = signalStore(
           );
         })
       )
-    ),
-    createCard: rxMethod<NewCard>(
+    )
+
+    const createCard = rxMethod<NewCard>(
       (newCard$) =>
         newCard$.pipe(
           tap(() => patchState(store, { isLoading: true })),
@@ -61,7 +63,7 @@ export const BoardStore = signalStore(
             boardService.createCard(newCard).pipe(
               tapResponse({
                 next: (card) => {
-                  patchState(store, { cards: [...store.cards(), card] });
+                  loadAll();
                 },
                 error: console.error,
                 finalize: () => patchState(store, { isLoading: false }),
@@ -69,14 +71,62 @@ export const BoardStore = signalStore(
             )
           )
         )
-    ),
-    getCardsByStatus: (status: Status): Card[] => {
+    )
+
+    const updateCard = rxMethod<Card>(
+      (updateCard$) =>
+        updateCard$.pipe(
+          tap(() => patchState(store, { isLoading: true })),
+          switchMap((card) =>
+            boardService.updateCard(card).pipe(
+              tapResponse({
+                next: (card) => {
+                  loadAll();
+                },
+                error: console.error,
+                finalize: () => patchState(store, { isLoading: false }),
+              })
+            )
+          )
+        )
+    )
+
+    const deleteCard = rxMethod<Card>(
+      (deletedCard$) =>
+        deletedCard$.pipe(
+          tap(() => patchState(store, { isLoading: true })),
+          switchMap((card) =>
+            boardService.deleteCard(card).pipe(
+              tapResponse({
+                next: (card) => {
+                  loadAll();
+                },
+                error: console.error,
+                finalize: () => patchState(store, { isLoading: false }),
+              })
+            )
+          )
+        )
+    )
+
+    const getCardsByStatus = (status: Status): Card[] => {
       return store.cards().filter(card => card.status === status);
-    },
-    updateCardOrder(status: Status, cards: Card[]) {
+    }
+
+    const updateCardOrder = (status: Status, cards: Card[]) => {
       const otherCards = store.cards().filter(c => c.status !== status);
       const allCards= [...otherCards, ...cards];
       patchState(store, { cards: allCards })
     }
-  }))
+
+    return {
+      loadAll,
+      createCard,
+      updateCard,
+      deleteCard,
+      getCardsByStatus,
+      updateCardOrder
+    }
+
+  }),
 );

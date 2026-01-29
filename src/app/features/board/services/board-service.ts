@@ -15,8 +15,16 @@ export class BoardService {
     return this.http.get<Card[]>(this.apiUrl);
   }
 
-  public createCard(card: NewCard): Observable<Card> {
-    return this.http.post<Card>(this.apiUrl, card);
+  public createCard(newCard: NewCard): Observable<Card> {
+    return this.http.post<Card>(this.apiUrl, newCard);
+  }
+
+  public updateCard(card: Card): Observable<Card> {
+    return this.http.put<Card>(`${this.apiUrl}/${card.id}`, card);
+  }
+
+  public deleteCard(card: Card): Observable<Card> {
+    return this.http.delete<Card>(`${this.apiUrl}/${card.id}`);
   }
 
 }

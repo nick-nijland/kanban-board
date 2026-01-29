@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {Column} from './components/column/column';
 import {BoardStore} from './store/board.store';
-import {Status, statuses} from '../../shared/models/status';
+import {Status, statuses, StatusTotal} from '../../shared/models/status';
 import {Card, NewCard} from '../../shared/models/card';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {Header} from './components/header/header/header';
@@ -30,7 +30,7 @@ export class BoardPage {
     return this.store.getCardsByStatus(status);
   }
 
-  public getStatusTotals(): Record<Status, number> {
+  public getStatusTotals(): StatusTotal[] {
     return this.store.statusTotals();
   }
 

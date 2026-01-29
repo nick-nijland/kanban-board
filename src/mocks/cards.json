@@ -1,5 +1,11 @@
 [
   {
+    "id": 4,
+    "title": "Setup CI/CD",
+    "description": "Configure GitHub Actions for automated testing and deployment to staging environment.",
+    "status": "DONE"
+  },
+  {
     "id": 1,
     "title": "Test",
     "description": "Set up the initial project structure and repository with README and basic folder organization.",
@@ -16,12 +22,6 @@
     "title": "Design Landing Page",
     "description": "Create a responsive landing page layout using Figma designs. Include hero section, features, and footer.",
     "status": "TODO"
-  },
-  {
-    "id": 4,
-    "title": "Setup CI/CD",
-    "description": "Configure GitHub Actions for automated testing and deployment to staging environment.",
-    "status": "DONE"
   },
   {
     "id": 5,

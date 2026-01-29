@@ -15,30 +15,27 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import {Card, NewCard} from '../../../shared/models/card';
 import {BoardService} from '../services/board-service';
 import {tapResponse} from '@ngrx/operators';
-import {Status, statuses} from '../../../shared/models/status';
+import {Status, statuses, StatusTotal} from '../../../shared/models/status';
 
 type BoardState = {
   cards: Card[];
   isLoading: boolean;
-  filter: { query: string; order: 'asc' | 'desc' };
 };
 
 const initialState: BoardState = {
   cards: [],
   isLoading: false,
-  filter: { query: '', order: 'asc' },
 };
 
 export const BoardStore = signalStore(
   withState(initialState),
   withComputed(({ cards }) => ({
     cardCount: computed(() => cards().length),
-    statusTotals: computed<Record<Status, number>>(() => {
-      const totals = {} as Record<Status, number>;
-      for (const status of statuses) {
-        totals[status] = cards().filter(card => card.status === status).length;
-      }
-      return totals;
+    statusTotals: computed<StatusTotal[]>(() => {
+      return statuses.map(status => ({
+        status,
+        total: cards().filter(card => card.status === status).length,
+      }));
     }),
   })),
   withMethods((store, boardService = inject(BoardService)) => ({

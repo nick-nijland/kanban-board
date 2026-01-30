@@ -1,7 +1,6 @@
-<h2 mat-dialog-title>Nieuw ticket</h2>
+<h2 mat-dialog-title>{{ data?.title || ('board.modal.new_ticket' | translate) }}</h2>
 <mat-dialog-content>
   <form [formGroup]="form">
-
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Title</mat-label>
       <input matInput formControlName="title" />

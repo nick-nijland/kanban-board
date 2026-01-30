@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {
+  MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
@@ -11,13 +12,13 @@ import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {Button} from '../../../../shared/components/button/button';
 import {Card, NewCard} from '../../../../shared/models/card';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-create-modal',
+  selector: 'app-ticket-modal',
   imports: [
     MatDialogContent,
     MatDialogActions,
-    //MatDialogClose,
     MatDialogTitle,
     ReactiveFormsModule,
     MatFormField,
@@ -25,15 +26,27 @@ import {Card, NewCard} from '../../../../shared/models/card';
     MatLabel,
     MatError,
     Button,
-    MatDialogClose
+    MatDialogClose,
+    TranslatePipe
   ],
-  templateUrl: './create-modal.html',
-  styleUrl: './create-modal.scss',
+  templateUrl: './ticket-modal.html',
+  styleUrl: './ticket-modal.scss',
 })
-export class CreateModal {
-  constructor(private dialogRef: MatDialogRef<CreateModal>) {}
+export class TicketModal {
+  data: Card | undefined = inject(MAT_DIALOG_DATA);
 
-  readonly form = new FormGroup({
+  constructor(
+    private dialogRef: MatDialogRef<TicketModal>
+) {
+    if (this.data) {
+      this.form.patchValue({
+        title: this.data.title,
+        description: this.data.description,
+      });
+    }
+  }
+
+  public readonly form = new FormGroup({
     title: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required],

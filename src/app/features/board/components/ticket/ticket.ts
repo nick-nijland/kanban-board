@@ -17,10 +17,10 @@ import {MatIcon} from '@angular/material/icon';
 export class Ticket {
   public updateTicket = output<{ card: Card }>();
   public deleteTicket = output<{ card: Card }>();
+  public editTicket = output<{ card: Card }>();
 
   public card = input.required<Card>();
   public statuses = input.required<string[]>();
-
 
   public updateTicketStatus(status: string): void {
     const updatedCard = {

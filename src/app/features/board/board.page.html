@@ -2,7 +2,7 @@
   loading spinner
 } @else {
   <app-header
-    (onCreateTicket)="createNewTicket()"
+    (onCreateTicket)="openModal()"
     [statuses]="getStatusTotals()"
   >
   </app-header>
@@ -16,6 +16,7 @@
         (cardDropped)="dropCard($event, status)"
         (onUpdateTicket)="updateTicket($event)"
         (onDeleteTicket)="deleteTicket($event)"
+        (onEditTicket)="openModal($event)"
       ></app-column>
     }
   </section>

@@ -6,7 +6,7 @@ import {Card, NewCard} from '../../shared/models/card';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {Header} from './components/header/header/header';
 import { MatDialog } from '@angular/material/dialog';
-import {CreateModal} from './components/create-modal/create-modal';
+import {TicketModal} from './components/ticket-modal/ticket-modal';
 
 @Component({
   selector: 'app-board-page',
@@ -58,9 +58,10 @@ export class BoardPage {
     }
   }
 
-  public createNewTicket(): void {
-    const dialogRef = this.dialog.open(CreateModal, {
+  public openModal(event?: { card: Card }): void {
+    const dialogRef = this.dialog.open(TicketModal, {
       width: '400px',
+      data: event?.card ?? undefined,
     });
 
     dialogRef.afterClosed().subscribe((result: NewCard | undefined) => {

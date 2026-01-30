@@ -13,7 +13,6 @@ import {TranslatePipe} from '@ngx-translate/core';
 })
 export class Column {
   public cardDropped = output<CdkDragDrop<Card[]>>();
-  public onUpdateTicket = output<{ card: Card }>();
   public onDeleteTicket = output<{ card: Card }>();
   public onEditTicket = output<{ card: Card, statuses: string[] }>();
 

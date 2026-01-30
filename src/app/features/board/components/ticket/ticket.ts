@@ -13,7 +13,6 @@ import {MatIcon} from '@angular/material/icon';
   styleUrls: ['./ticket.scss'],
 })
 export class Ticket {
-  public updateTicket = output<{ card: Card }>();
   public deleteTicket = output<{ card: Card }>();
   public editTicket = output<{ card: Card, statuses: string[] }>();
 

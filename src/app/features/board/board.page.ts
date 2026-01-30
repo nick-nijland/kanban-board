@@ -75,10 +75,6 @@ export class BoardPage {
     });
   }
 
-  public updateTicket(event: { card: Card }): void {
-    this.store.updateCard(event.card);
-  }
-
   public deleteTicket(event: { card: Card }): void {
     this.store.deleteCard(event.card);
   }

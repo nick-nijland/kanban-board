@@ -1,7 +1,7 @@
-<h2 mat-dialog-title>{{ data?.title || ('board.modal.new_ticket' | translate) }}</h2>
+<h2 mat-dialog-title>{{ data?.card?.title || ('board.modal.new_ticket' | translate) }}</h2>
 <mat-dialog-content>
   <form [formGroup]="form">
-    <mat-form-field appearance="outline" class="full-width">
+    <mat-form-field>
       <mat-label>Title</mat-label>
       <input matInput formControlName="title" />
       @if (form.controls.title.invalid) {
@@ -11,7 +11,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full-width">
+    <mat-form-field>
       <mat-label>Description</mat-label>
       <textarea
         matInput
@@ -25,6 +25,19 @@
       }
     </mat-form-field>
 
+    @if (data?.card) {
+      <mat-form-field>
+        <mat-label>{{ 'board.modal.status' | translate }}</mat-label>
+        <mat-select formControlName="status">
+          @for (status of statuses; track status) {
+            <mat-option [value]="status" [disabled]="status === data?.card?.status">
+              {{ 'board.status.' + status | lowercase | translate }}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    }
+
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
@@ -33,9 +46,17 @@
     [disabled]="false"
     [text]="'Annuleren'"
   ></app-button>
-  <app-button
-    (clicked)="createItem()"
-    [disabled]="form.invalid"
-    [text]="'Voeg toe'"
-  ></app-button>
+  @if (data?.card) {
+    <app-button
+      (clicked)="saveTicket()"
+      [disabled]="form.invalid"
+      [text]="'generic.save' | translate"
+    ></app-button>
+  } @else {
+    <app-button
+      (clicked)="createTicket()"
+      [disabled]="form.invalid"
+      [text]="'generic.add' | translate"
+    ></app-button>
+  }
 </mat-dialog-actions>

@@ -58,15 +58,19 @@ export class BoardPage {
     }
   }
 
-  public openModal(event?: { card: Card }): void {
+  public openModal(event?: { card: Card, statuses: string[] }): void {
     const dialogRef = this.dialog.open(TicketModal, {
       width: '400px',
-      data: event?.card ?? undefined,
+      data: event ?? undefined,
     });
 
-    dialogRef.afterClosed().subscribe((result: NewCard | undefined) => {
-      if (result) {
-        this.store.createCard(result)
+    dialogRef.afterClosed().subscribe((card: NewCard | Card) => {
+      if (card) {
+        if ('id' in card) {
+          this.store.updateCard(card);
+        } else {
+          this.store.createCard(card);
+        }
       }
     });
   }

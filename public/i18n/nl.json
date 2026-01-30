@@ -2,13 +2,14 @@
   "test": "Testing123",
   "generic": {
     "add": "Voeg toe",
-    "open": "Bekijk",
-    "move": "Verplaats"
+    "save": "Opslaan",
+    "edit": "Bewerk"
   },
   "board": {
     "title": "Taken",
     "modal": {
-      "new_ticket": "Nieuw ticket"
+      "new_ticket": "Nieuw ticket",
+      "status": "Selecteer nieuwe status"
     },
     "status": {
       "todo": "Te doen",

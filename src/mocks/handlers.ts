@@ -19,13 +19,25 @@ export const handlers = [
       return HttpResponse.json<Card>(card, { status: 201 });
     }),
 
-    http.put('/api/tickets/:id', async ({ request }) => {
-      const updatedCard = (await request.json()) as Card;
-      const index = cards.findIndex(card => card.id === updatedCard.id)
-      cards.push(updatedCard);
+  http.put('/api/tickets/:id', async ({ request }) => {
+    const updatedCard = (await request.json()) as Card;
+    const index = cards.findIndex(card => card.id === updatedCard.id);
+
+    if (index === -1) {
+      return HttpResponse.json({ error: 'Card not found' }, { status: 404 });
+    }
+
+    const existingCard = cards[index];
+
+    if (existingCard.status === updatedCard.status) {
+      cards[index] = updatedCard;
+    } else {
       cards.splice(index, 1);
-      return HttpResponse.json<Card>(updatedCard, { status: 201 });
-    }),
+      cards.push(updatedCard);
+    }
+
+    return HttpResponse.json<Card>(updatedCard, { status: 200 });
+  }),
 
   http.delete('/api/tickets/:id', ({ params }) => {
       const id = Number(params['id']);

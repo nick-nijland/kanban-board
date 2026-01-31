@@ -73,14 +73,14 @@ export const BoardStore = signalStore(
         )
     )
 
-    const updateCard = rxMethod<Card>(
+    const updateCard = rxMethod<[Card, number[]?]>(
       (updateCard$) =>
         updateCard$.pipe(
           tap(() => patchState(store, { isLoading: true })),
-          switchMap((card) =>
-            boardService.updateCard(card).pipe(
+          switchMap(([card, indexes]) =>
+            boardService.updateCard(card, indexes).pipe(
               tapResponse({
-                next: (card) => {
+                next: (updatedCard) => {
                   loadAll();
                 },
                 error: console.error,
@@ -89,7 +89,7 @@ export const BoardStore = signalStore(
             )
           )
         )
-    )
+    );
 
     const deleteCard = rxMethod<Card>(
       (deletedCard$) =>

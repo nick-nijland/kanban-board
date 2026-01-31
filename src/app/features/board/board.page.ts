@@ -3,7 +3,7 @@ import {Column} from './components/column/column';
 import {BoardStore} from './store/board.store';
 import {Status, statuses, StatusTotal} from '../../shared/models/status';
 import {Card, NewCard} from '../../shared/models/card';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {CdkDragDrop} from '@angular/cdk/drag-drop';
 import {Header} from './components/header/header/header';
 import { MatDialog } from '@angular/material/dialog';
 import {TicketModal} from './components/ticket-modal/ticket-modal';
@@ -39,23 +39,11 @@ export class BoardPage {
   }
 
   public dropCard(event: CdkDragDrop<Card[]>, targetStatus: Status) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      this.store.updateCardOrder(targetStatus, event.container.data);
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-
-      const movedCard = event.container.data[event.currentIndex];
-      movedCard.status = targetStatus;
-
-      this.store.updateCardOrder(event.previousContainer.data[0]?.status!, event.previousContainer.data);
-      this.store.updateCardOrder(targetStatus, event.container.data);
+    const card = {
+      ...event.item.data,
+      status: targetStatus
     }
+    this.store.updateCard([card, [event.previousIndex, event.currentIndex]]);
   }
 
   public openModal(event?: { card: Card, statuses: string[] }): void {
@@ -67,7 +55,7 @@ export class BoardPage {
     dialogRef.afterClosed().subscribe((card: NewCard | Card) => {
       if (card) {
         if ('id' in card) {
-          this.store.updateCard(card);
+          this.store.updateCard([card]);
         } else {
           this.store.createCard(card);
         }

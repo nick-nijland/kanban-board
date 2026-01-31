@@ -8,9 +8,10 @@
 
   <h3>{{ 'board.status.' + status().toLocaleLowerCase() | translate }} {{ cards().length }}</h3>
 
-  @for (card of cards(); track card) {
+  @for (card of cards(); track card.id) {
     <app-ticket
       cdkDrag
+      [cdkDragData]="card"
       [statuses]="connectedTo()"
       [card]="card"
       (deleteTicket)="onDeleteTicket.emit($event)"

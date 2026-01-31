@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Card, NewCard} from '../../../shared/models/card';
 
@@ -19,8 +19,13 @@ export class BoardService {
     return this.http.post<Card>(this.apiUrl, newCard);
   }
 
-  public updateCard(card: Card): Observable<Card> {
-    return this.http.put<Card>(`${this.apiUrl}/${card.id}`, card);
+  public updateCard(card: Card, indexes?: number[]): Observable<Card> {
+    let params = new HttpParams();
+    if (indexes !== undefined) {
+      params = params.set('previousIndex', indexes[0].toString());
+      params = params.set('currentIndex', indexes[1].toString());
+    }
+    return this.http.put<Card>(`${this.apiUrl}/${card.id}`, card, { params });
   }
 
   public deleteCard(card: Card): Observable<Card> {

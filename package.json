@@ -7,6 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "prettier": "prettier --write .",
     "serve:ssr:kanban-board": "node dist/kanban-board/server/server.mjs"
   },
   "prettier": {
@@ -52,6 +53,7 @@
     "@types/node": "^20.17.19",
     "jsdom": "^27.1.0",
     "msw": "^2.12.7",
+    "prettier": "^3.8.1",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
   },

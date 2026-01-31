@@ -4,10 +4,13 @@
     <mat-card-subtitle>{{ card().description }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-actions>
-    <app-button [text]="'generic.edit' | translate" (clicked)="editTicket.emit({ card: card(), statuses: statuses() })"></app-button>
+    <app-button
+      [text]="'generic.edit' | translate"
+      (clicked)="editTicket.emit({ card: card(), statuses: statuses() })"
+    ></app-button>
     <button (click)="deleteTicket.emit({ card: card() })" matIconButton aria-label="Delete ticket">
       <mat-icon>delete</mat-icon>
     </button>
   </mat-card-actions>
 </mat-card>
-<br>
+<br />

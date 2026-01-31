@@ -4,8 +4,8 @@
   [id]="idPrefix + status()"
   [cdkDropListData]="cards()"
   [cdkDropListConnectedTo]="getConnectedTo()"
-  (cdkDropListDropped)="onDrop($event)">
-
+  (cdkDropListDropped)="onDrop($event)"
+>
   <h3>{{ 'board.status.' + status().toLocaleLowerCase() | translate }} {{ cards().length }}</h3>
 
   @for (card of cards(); track card.id) {

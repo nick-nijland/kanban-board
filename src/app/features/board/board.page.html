@@ -1,11 +1,7 @@
 @if (loading()) {
   loading spinner
 } @else {
-  <app-header
-    (onCreateTicket)="openModal()"
-    [statuses]="getStatusTotals()"
-  >
-  </app-header>
+  <app-header (onCreateTicket)="openModal()" [statuses]="getStatusTotals()"> </app-header>
 
   <section>
     @for (status of statuses; track status) {

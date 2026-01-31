@@ -1,22 +1,22 @@
-import {Component, inject} from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
   MatDialogRef,
-  MatDialogTitle
+  MatDialogTitle,
 } from '@angular/material/dialog';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
-import {MatInput} from '@angular/material/input';
-import {Button} from '../../../../shared/components/button/button';
-import {Card, NewCard} from '../../../../shared/models/card';
-import {TranslatePipe} from '@ngx-translate/core';
-import {TicketModalData} from './models/ticket-modal.model';
-import {MatOption, MatSelect} from '@angular/material/select';
-import {Status, statuses} from '../../../../shared/models/status';
-import {LowerCasePipe} from '@angular/common';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { Button } from '../../../../shared/components/button/button';
+import { Card, NewCard } from '../../../../shared/models/card';
+import { TranslatePipe } from '@ngx-translate/core';
+import { TicketModalData } from './models/ticket-modal.model';
+import { MatOption, MatSelect } from '@angular/material/select';
+import { Status, statuses } from '../../../../shared/models/status';
+import { LowerCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-ticket-modal',
@@ -34,7 +34,7 @@ import {LowerCasePipe} from '@angular/common';
     TranslatePipe,
     MatSelect,
     MatOption,
-    LowerCasePipe
+    LowerCasePipe,
   ],
   templateUrl: './ticket-modal.html',
   styleUrl: './ticket-modal.scss',
@@ -42,17 +42,14 @@ import {LowerCasePipe} from '@angular/common';
 export class TicketModal {
   data: TicketModalData | undefined = inject(MAT_DIALOG_DATA);
 
-  constructor(
-    private dialogRef: MatDialogRef<TicketModal>
-) {
+  constructor(private dialogRef: MatDialogRef<TicketModal>) {
     if (this.data?.card) {
-
       this.form.addControl(
         'status',
         new FormControl('', {
           nonNullable: true,
           validators: [Validators.required],
-        })
+        }),
       );
       this.form.patchValue({
         title: this.data.card.title,
@@ -80,7 +77,7 @@ export class TicketModal {
     const newCard: NewCard = {
       title: this.form.controls.title.value,
       description: this.form.controls.description.value,
-    }
+    };
     this.dialogRef.close(newCard);
   }
 
@@ -91,7 +88,7 @@ export class TicketModal {
         title: this.form.controls.title.value,
         description: this.form.controls.description.value,
         status: this.form.controls.status.value as Status,
-      }
+      };
       this.dialogRef.close(card);
     }
   }

@@ -1,5 +1,5 @@
-import {Component, input, output} from '@angular/core';
-import {MatButton, MatButtonAppearance} from '@angular/material/button';
+import { Component, input, output } from '@angular/core';
+import { MatButton, MatButtonAppearance } from '@angular/material/button';
 
 @Component({
   selector: 'app-button',

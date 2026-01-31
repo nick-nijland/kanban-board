@@ -1,6 +1,6 @@
-import {Status} from './status';
+import { Status } from './status';
 
-export interface Card extends NewCard{
+export interface Card extends NewCard {
   id: number;
   status: Status;
 }

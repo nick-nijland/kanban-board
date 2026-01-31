@@ -1,19 +1,16 @@
-import {Component, inject} from '@angular/core';
-import {Column} from './components/column/column';
-import {BoardStore} from './store/board.store';
-import {Status, statuses, StatusTotal} from '../../shared/models/status';
-import {Card, NewCard} from '../../shared/models/card';
-import {CdkDragDrop} from '@angular/cdk/drag-drop';
-import {Header} from './components/header/header/header';
+import { Component, inject } from '@angular/core';
+import { Column } from './components/column/column';
+import { BoardStore } from './store/board.store';
+import { Status, statuses, StatusTotal } from '../../shared/models/status';
+import { Card, NewCard } from '../../shared/models/card';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { Header } from './components/header/header/header';
 import { MatDialog } from '@angular/material/dialog';
-import {TicketModal} from './components/ticket-modal/ticket-modal';
+import { TicketModal } from './components/ticket-modal/ticket-modal';
 
 @Component({
   selector: 'app-board-page',
-  imports: [
-    Column,
-    Header
-  ],
+  imports: [Column, Header],
   templateUrl: './board.page.html',
   styleUrl: './board.page.scss',
 })
@@ -35,18 +32,18 @@ export class BoardPage {
   }
 
   public getStatusses(status: Status): Status[] {
-    return this.statuses.filter(state => state !== status);
+    return this.statuses.filter((state) => state !== status);
   }
 
   public dropCard(event: CdkDragDrop<Card[]>, targetStatus: Status) {
     const card = {
       ...event.item.data,
-      status: targetStatus
-    }
+      status: targetStatus,
+    };
     this.store.updateCard([card, [event.previousIndex, event.currentIndex]]);
   }
 
-  public openModal(event?: { card: Card, statuses: string[] }): void {
+  public openModal(event?: { card: Card; statuses: string[] }): void {
     const dialogRef = this.dialog.open(TicketModal, {
       width: '400px',
       data: event ?? undefined,

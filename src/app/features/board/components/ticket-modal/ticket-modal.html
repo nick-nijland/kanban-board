@@ -35,12 +35,14 @@
   <app-button mat-dialog-close [disabled]="false" [text]="'Annuleren'"></app-button>
   @if (data?.card) {
     <app-button
+      [type]="'filled'"
       (clicked)="saveTicket()"
       [disabled]="form.invalid"
       [text]="'generic.save' | translate"
     ></app-button>
   } @else {
     <app-button
+      [type]="'filled'"
       (clicked)="createTicket()"
       [disabled]="form.invalid"
       [text]="'generic.add' | translate"

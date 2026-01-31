@@ -5,10 +5,11 @@ import { Card } from '../../../../shared/models/card';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Button } from '../../../../shared/components/button/button';
 import { MatIcon } from '@angular/material/icon';
+import { TruncatePipe } from '../../../../shared/pipes/truncate-pipe';
 
 @Component({
   selector: 'app-ticket',
-  imports: [MatCardModule, MatButtonModule, TranslatePipe, Button, MatIcon],
+  imports: [MatCardModule, MatButtonModule, TranslatePipe, Button, MatIcon, TruncatePipe],
   templateUrl: './ticket.html',
   styleUrls: ['./ticket.scss'],
 })

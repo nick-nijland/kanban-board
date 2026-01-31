@@ -3,6 +3,15 @@ import { Card, NewCard } from '../app/shared/models/card';
 
 export let cards: Card[] = [
   {
+    id: 16,
+    title:
+      'Comprehensive Security Audit ies review server configurations, check for SQL injection, XSS, CSRF, and other common attack vectors.\nPrepare a detailed report with recommendations, prioritized fixes',
+    description: `Perform a full security audit of the application including authentication, authorization, data storage, and third-party dependencies.
+Analyze potential vulnerabilities, review server configurations, check for SQL injection, XSS, CSRF, and other common attack vectors.
+Prepare a detailed report with recommendations, prioritized fixes, and a plan for implementing security best practices to ensure the application meets industry standards.`,
+    status: 'TODO',
+  },
+  {
     id: 4,
     title: 'Setup CI/CD',
     description:

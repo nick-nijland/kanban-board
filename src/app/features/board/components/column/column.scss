@@ -1,5 +1,13 @@
+@use "variables";
+
 .column {
-  padding: 20px;
+  background-color: lightgray;
+  border-radius: variables.$default-border-radius;
+  box-shadow: variables.$inset-shadow;
+  padding: 1.5em;
   height: 100%;
-  background: lightgray;
+}
+
+h3 {
+  margin: 0 0 1.2em;
 }

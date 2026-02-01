@@ -1,6 +1,22 @@
+@use 'variables';
+
 :host {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-bottom: 1.5em;
+}
+
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) {
+  background-color: variables.$surface-color;
+
+  &.in_progress {
+    background-color: variables.$info-color;
+  ;
+  }
+
+  &.done {
+    background-color: variables.$success-color;
+  }
+
 }

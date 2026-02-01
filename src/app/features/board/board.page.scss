@@ -5,6 +5,27 @@ section {
 }
 
 section > * {
-  width: 33%;
-  background: palegoldenrod;
+  flex: 1;
+  margin: 0 .7em;
+}
+
+section > *:first-child {
+  margin-left: 0;
+}
+section > *:last-child {
+  margin-right: 0;
+}
+
+@media (max-width: 768px) {
+  section {
+    flex-direction: column;
+  }
+
+  section > * {
+    margin: 0 0 1em 0;
+  }
+
+  section > *:last-child {
+    margin-bottom: 0;
+  }
 }

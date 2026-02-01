@@ -1,9 +1,27 @@
 {
+  "generic": {
+    "add": "Add",
+    "save": "Save",
+    "edit": "Edit",
+    "close": "Close"
+  },
   "board": {
+    "title": "Tasks",
+    "modal": {
+      "new_ticket": "New Ticket",
+      "status": "Select new status"
+    },
     "status": {
-      "todo": "To do",
-      "inProgress": "In progress",
+      "todo": "To Do",
+      "in_progress": "In Progress",
       "done": "Done"
+    },
+    "error": {
+      "generic": "Something went wrong.",
+      "loaded": "Tickets could not be loaded.",
+      "create": "Ticket could not be created.",
+      "update": "Ticket could not be updated.",
+      "delete": "Ticket could not be deleted."
     }
   }
 }

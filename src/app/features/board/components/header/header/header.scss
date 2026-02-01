@@ -18,3 +18,14 @@
     background-color: variables.$success-color;
   }
 }
+
+@media (max-width: 768px) {
+  :host {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  app-button {
+    margin-top: 1em;
+  }
+}

@@ -5,6 +5,13 @@
 } @else {
   <app-header (onCreateTicket)="openModal()" [statuses]="getStatusTotals()"> </app-header>
 
+  @if (error()) {
+    <app-notification
+      [text]="error() ?? ''"
+      [closeText]="'generic.close'"
+    ></app-notification>
+  }
+
   <section>
     @for (status of statuses; track status) {
       <app-column

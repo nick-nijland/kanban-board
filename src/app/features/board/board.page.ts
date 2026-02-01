@@ -10,10 +10,11 @@ import { Column } from './components/column/column';
 import { Header } from './components/header/header/header';
 import { TicketModal } from './components/ticket-modal/ticket-modal';
 import { BoardStore } from './store/board.store';
+import {Notification} from '../../shared/components/notification/notification/notification';
 
 @Component({
   selector: 'app-board-page',
-  imports: [Column, Header, MatProgressSpinner],
+  imports: [Column, Header, MatProgressSpinner, Notification],
   templateUrl: './board.page.html',
   styleUrl: './board.page.scss',
 })

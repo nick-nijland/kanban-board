@@ -1,10 +1,10 @@
 import { Component, input, output } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { Card } from '../../../../shared/models/card';
+import { MatCardModule } from '@angular/material/card';
+import { MatIcon } from '@angular/material/icon';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Button } from '../../../../shared/components/button/button';
-import { MatIcon } from '@angular/material/icon';
+import { Card } from '../../../../shared/models/card';
 import { TruncatePipe } from '../../../../shared/pipes/truncate-pipe';
 
 @Component({

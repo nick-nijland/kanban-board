@@ -8,6 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "prettier": "prettier --write .",
+    "lint": "tslint -p tsconfig.app.json -c tslint.json 'src/**/*.ts'",
+    "lint:fix": "tslint --fix -p tsconfig.app.json -c tslint.json 'src/**/*.ts'",
     "serve:ssr:kanban-board": "node dist/kanban-board/server/server.mjs"
   },
   "prettier": {
@@ -54,6 +56,7 @@
     "jsdom": "^27.1.0",
     "msw": "^2.12.7",
     "prettier": "^3.8.1",
+    "tslint": "^5.20.1",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
   },

@@ -1,18 +1,18 @@
 import { computed, inject } from '@angular/core';
-import { pipe, switchMap, tap } from 'rxjs';
+import { tapResponse } from '@ngrx/operators';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { Card, NewCard } from '../../../shared/models/card';
-import { BoardService } from '../services/board-service';
-import { tapResponse } from '@ngrx/operators';
-import { Status, statuses, StatusTotal } from '../../../shared/models/status';
 import { TranslateService } from '@ngx-translate/core';
+import { pipe, switchMap, tap } from 'rxjs';
+import { Card, NewCard } from '../../../shared/models/card';
+import { Status, statuses, StatusTotal } from '../../../shared/models/status';
+import { BoardService } from '../services/board-service';
 
-type BoardState = {
+interface BoardState {
   cards: Card[];
   isLoading: boolean;
   error: string | undefined;
-};
+}
 
 const initialState: BoardState = {
   cards: [],

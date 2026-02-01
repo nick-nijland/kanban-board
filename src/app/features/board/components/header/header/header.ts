@@ -1,8 +1,8 @@
 import { Component, input, output } from '@angular/core';
-import { Button } from '../../../../../shared/components/button/button';
-import { StatusTotal } from '../../../../../shared/models/status';
 import { MatChip, MatChipSet } from '@angular/material/chips';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Button } from '../../../../../shared/components/button/button';
+import { StatusTotal } from '../../../../../shared/models/status';
 
 @Component({
   selector: 'app-header',

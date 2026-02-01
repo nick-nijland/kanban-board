@@ -1,6 +1,6 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { isDevMode } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
+import { isDevMode } from '@angular/core';
+import { bootstrapApplication } from '@angular/platform-browser';
 
 import { App } from './app/app';
 import { appConfig } from './app/app.config';

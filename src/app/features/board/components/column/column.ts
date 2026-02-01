@@ -1,9 +1,9 @@
-import { Component, computed, input, output, Output } from '@angular/core';
-import { Status, statuses } from '../../../../shared/models/status';
-import { Card } from '../../../../shared/models/card';
-import { Ticket } from '../ticket/ticket';
 import { CdkDrag, CdkDragDrop, CdkDropList } from '@angular/cdk/drag-drop';
+import { Component, computed, input, output, Output } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Card } from '../../../../shared/models/card';
+import { Status, statuses } from '../../../../shared/models/status';
+import { Ticket } from '../ticket/ticket';
 
 @Component({
   selector: 'app-column',

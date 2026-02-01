@@ -1,15 +1,15 @@
-import { Component, DestroyRef, inject } from '@angular/core';
-import { Column } from './components/column/column';
-import { BoardStore } from './store/board.store';
-import { Status, statuses, StatusTotal } from '../../shared/models/status';
-import { Card, NewCard } from '../../shared/models/card';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { Header } from './components/header/header/header';
-import { MatDialog } from '@angular/material/dialog';
-import { TicketModal } from './components/ticket-modal/ticket-modal';
-import { TranslateService } from '@ngx-translate/core';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatDialog } from '@angular/material/dialog';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { TranslateService } from '@ngx-translate/core';
+import { Card, NewCard } from '../../shared/models/card';
+import { Status, statuses, StatusTotal } from '../../shared/models/status';
+import { Column } from './components/column/column';
+import { Header } from './components/header/header/header';
+import { TicketModal } from './components/ticket-modal/ticket-modal';
+import { BoardStore } from './store/board.store';
 
 @Component({
   selector: 'app-board-page',
@@ -21,9 +21,11 @@ export class BoardPage {
   public readonly store = inject(BoardStore);
   public readonly translateService = inject(TranslateService);
   public readonly dialog = inject(MatDialog);
-  private readonly destroyRef = inject(DestroyRef);
   public loading = this.store.isLoading;
   public error = this.store.error;
+
+  protected readonly statuses = statuses;
+  private readonly destroyRef = inject(DestroyRef);
 
   constructor() {
     this.store.loadAll();
@@ -72,6 +74,4 @@ export class BoardPage {
   public deleteTicket(event: { card: Card }): void {
     this.store.deleteCard(event.card);
   }
-
-  protected readonly statuses = statuses;
 }

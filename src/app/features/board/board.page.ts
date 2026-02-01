@@ -7,17 +7,21 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Header } from './components/header/header/header';
 import { MatDialog } from '@angular/material/dialog';
 import { TicketModal } from './components/ticket-modal/ticket-modal';
+import { TranslateService } from '@ngx-translate/core';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-board-page',
-  imports: [Column, Header],
+  imports: [Column, Header, MatProgressSpinner],
   templateUrl: './board.page.html',
   styleUrl: './board.page.scss',
 })
 export class BoardPage {
   public readonly store = inject(BoardStore);
+  public readonly translateService = inject(TranslateService);
   public readonly dialog = inject(MatDialog);
   public loading = this.store.isLoading;
+  public error = this.store.error;
 
   constructor() {
     this.store.loadAll();

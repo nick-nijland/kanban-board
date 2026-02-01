@@ -117,8 +117,12 @@ Prepare a detailed report with recommendations, prioritized fixes, and a plan fo
 ];
 
 export const handlers = [
+  http.get('/', () => {
+    return HttpResponse.json<Card[]>(cards as Card[], { status: 200, statusText: 'OK' });
+  }),
+
   http.get('/api/tickets', () => {
-    return HttpResponse.json<Card[]>(cards as Card[]);
+    return HttpResponse.json<Card[]>(cards as Card[], { status: 200, statusText: 'OK' });
   }),
 
   http.post('/api/tickets', async ({ request }) => {

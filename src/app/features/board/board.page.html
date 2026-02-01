@@ -1,5 +1,7 @@
 @if (loading()) {
-  loading spinner
+  <div class="loading">
+    <mat-spinner></mat-spinner>
+  </div>
 } @else {
   <app-header (onCreateTicket)="openModal()" [statuses]="getStatusTotals()"> </app-header>
 

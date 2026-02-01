@@ -1,4 +1,6 @@
-<h2 mat-dialog-title>{{ data?.card?.title || ('board.modal.new_ticket' | translate) }}</h2>
+<h2 mat-dialog-title>
+  {{ data?.card?.title || ('board.modal.new_ticket' | translate) | truncate: 25 }}
+</h2>
 <mat-dialog-content>
   <form [formGroup]="form">
     <mat-form-field>

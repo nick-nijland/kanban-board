@@ -1,18 +1,21 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
+import { isDevMode } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+
 import { App } from './app/app';
-import { environment } from './environments/environment';
+import { appConfig } from './app/app.config';
 
-async function startApp() {
-  if (!environment.production) {
+async function prepareApp() {
+  if (isDevMode()) {
     const { worker } = await import('./mocks/browser');
-
-    await worker.start({
-      onUnhandledRequest: 'bypass',
+    return worker.start({
+      onUnhandledRequest: 'warn',
     });
   }
 
-  await bootstrapApplication(App, appConfig);
+  return Promise.resolve();
 }
 
-startApp();
+prepareApp().then(() => {
+  bootstrapApplication(App, appConfig);
+});

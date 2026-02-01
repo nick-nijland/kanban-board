@@ -12,11 +12,9 @@
 
   &.in_progress {
     background-color: variables.$info-color;
-  ;
   }
 
   &.done {
     background-color: variables.$success-color;
   }
-
 }

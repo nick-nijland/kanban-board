@@ -3,7 +3,8 @@
   "generic": {
     "add": "Voeg toe",
     "save": "Opslaan",
-    "edit": "Bewerk"
+    "edit": "Bewerk",
+    "close": "Sluiten"
   },
   "board": {
     "title": "Taken",
@@ -15,6 +16,13 @@
       "todo": "Te doen",
       "in_progress": "Bezig",
       "done": "Klaar"
+    },
+    "error": {
+      "generic": "Er ging iets mis.",
+      "loaded": "Tickets konden niet worden geladen.",
+      "create": "Ticket kon niet worden aangemaakt.",
+      "update": "Ticket kon niet worden bijgewerkt.",
+      "delete": "Ticket kon niet worden verwijderd."
     }
   }
 }

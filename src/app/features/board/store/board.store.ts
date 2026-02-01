@@ -6,15 +6,18 @@ import { Card, NewCard } from '../../../shared/models/card';
 import { BoardService } from '../services/board-service';
 import { tapResponse } from '@ngrx/operators';
 import { Status, statuses, StatusTotal } from '../../../shared/models/status';
+import { TranslateService } from '@ngx-translate/core';
 
 type BoardState = {
   cards: Card[];
   isLoading: boolean;
+  error: string | undefined;
 };
 
 const initialState: BoardState = {
   cards: [],
   isLoading: false,
+  error: undefined,
 };
 
 export const BoardStore = signalStore(
@@ -28,90 +31,96 @@ export const BoardStore = signalStore(
       }));
     }),
   })),
-  withMethods((store, boardService = inject(BoardService)) => {
-    const loadAll = rxMethod<void>(
-      pipe(
-        tap(() => patchState(store, { isLoading: true })),
-        switchMap(() => {
-          return boardService.getCards().pipe(
-            tapResponse({
-              next: (cards) => patchState(store, { cards }),
-              error: console.error,
-              finalize: () => patchState(store, { isLoading: false }),
-            }),
-          );
-        }),
-      ),
-    );
+  withMethods(
+    (store, boardService = inject(BoardService), translateService = inject(TranslateService)) => {
+      const loadAll = rxMethod<void>(
+        pipe(
+          tap(() => patchState(store, { isLoading: true, error: undefined })),
+          switchMap(() => {
+            return boardService.getCards().pipe(
+              tapResponse({
+                next: (cards) => patchState(store, { cards }),
+                error: () =>
+                  patchState(store, { error: translateService.instant('board.error.loaded') }),
+                finalize: () => patchState(store, { isLoading: false }),
+              }),
+            );
+          }),
+        ),
+      );
 
-    const createCard = rxMethod<NewCard>((newCard$) =>
-      newCard$.pipe(
-        tap(() => patchState(store, { isLoading: true })),
-        switchMap((newCard) =>
-          boardService.createCard(newCard).pipe(
-            tapResponse({
-              next: (card) => {
-                loadAll();
-              },
-              error: console.error,
-              finalize: () => patchState(store, { isLoading: false }),
-            }),
+      const createCard = rxMethod<NewCard>((newCard$) =>
+        newCard$.pipe(
+          tap(() => patchState(store, { isLoading: true, error: undefined })),
+          switchMap((newCard) =>
+            boardService.createCard(newCard).pipe(
+              tapResponse({
+                next: () => {
+                  loadAll();
+                },
+                error: () =>
+                  patchState(store, { error: translateService.instant('board.error.create') }),
+                finalize: () => patchState(store, { isLoading: false }),
+              }),
+            ),
           ),
         ),
-      ),
-    );
+      );
 
-    const updateCard = rxMethod<[Card, number[]?]>((updateCard$) =>
-      updateCard$.pipe(
-        tap(() => patchState(store, { isLoading: true })),
-        switchMap(([card, indexes]) =>
-          boardService.updateCard(card, indexes).pipe(
-            tapResponse({
-              next: (updatedCard) => {
-                loadAll();
-              },
-              error: console.error,
-              finalize: () => patchState(store, { isLoading: false }),
-            }),
+      const updateCard = rxMethod<[Card, number[]?]>((updateCard$) =>
+        updateCard$.pipe(
+          tap(() => patchState(store, { isLoading: true, error: undefined })),
+          switchMap(([card, indexes]) =>
+            boardService.updateCard(card, indexes).pipe(
+              tapResponse({
+                next: () => {
+                  loadAll();
+                },
+                error: () =>
+                  patchState(store, { error: translateService.instant('board.error.update') }),
+                finalize: () => patchState(store, { isLoading: false }),
+              }),
+            ),
           ),
         ),
-      ),
-    );
+      );
 
-    const deleteCard = rxMethod<Card>((deletedCard$) =>
-      deletedCard$.pipe(
-        tap(() => patchState(store, { isLoading: true })),
-        switchMap((card) =>
-          boardService.deleteCard(card).pipe(
-            tapResponse({
-              next: (card) => {
-                loadAll();
-              },
-              error: console.error,
-              finalize: () => patchState(store, { isLoading: false }),
-            }),
+      const deleteCard = rxMethod<Card>((deletedCard$) =>
+        deletedCard$.pipe(
+          tap(() => patchState(store, { isLoading: true, error: undefined })),
+          switchMap((card) =>
+            boardService.deleteCard(card).pipe(
+              tapResponse({
+                next: () => {
+                  loadAll();
+                },
+                error: () =>
+                  patchState(store, { error: translateService.instant('board.error.delete') }),
+                finalize: () => patchState(store, { isLoading: false }),
+              }),
+            ),
           ),
         ),
-      ),
-    );
+      );
 
-    const getCardsByStatus = (status: Status): Card[] => {
-      return store.cards().filter((card) => card.status === status);
-    };
+      const getCardsByStatus = (status: Status): Card[] => {
+        return store.cards().filter((card) => card.status === status);
+      };
 
-    const updateCardOrder = (status: Status, cards: Card[]) => {
-      const otherCards = store.cards().filter((c) => c.status !== status);
-      const allCards = [...otherCards, ...cards];
-      patchState(store, { cards: allCards });
-    };
+      const updateCardOrder = (status: Status, cards: Card[]) => {
+        const otherCards = store.cards().filter((c) => c.status !== status);
+        const allCards = [...otherCards, ...cards];
+        patchState(store, { cards: allCards });
+      };
 
-    return {
-      loadAll,
-      createCard,
-      updateCard,
-      deleteCard,
-      getCardsByStatus,
-      updateCardOrder,
-    };
-  }),
+      return {
+        loadAll,
+        createCard,
+        updateCard,
+        deleteCard,
+        getCardsByStatus,
+        updateCardOrder,
+      };
+    },
+  ),
 );

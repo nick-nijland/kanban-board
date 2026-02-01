@@ -17,6 +17,7 @@ import { TicketModalData } from './models/ticket-modal.model';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { Status, statuses } from '../../../../shared/models/status';
 import { LowerCasePipe } from '@angular/common';
+import { TruncatePipe } from '../../../../shared/pipes/truncate-pipe';
 
 @Component({
   selector: 'app-ticket-modal',
@@ -35,6 +36,7 @@ import { LowerCasePipe } from '@angular/common';
     MatSelect,
     MatOption,
     LowerCasePipe,
+    TruncatePipe,
   ],
   templateUrl: './ticket-modal.html',
   styleUrl: './ticket-modal.scss',

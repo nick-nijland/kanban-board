@@ -1,22 +1,33 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {Header} from './header';
+import {inputBinding} from '@angular/core';
+import {TranslateModule} from '@ngx-translate/core';
 
-import { Header } from './header';
 
-describe('Header', () => {
-  let component: Header;
+describe('Header Component', () => {
   let fixture: ComponentFixture<Header>;
+  let component: Header;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Header],
+      imports: [
+        Header,
+        TranslateModule.forRoot()
+      ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Header);
+    fixture = TestBed.createComponent(Header, {
+      bindings: [
+        inputBinding('statuses', () => ["TODO", "DONE"]),
+      ]
+    });
+
     component = fixture.componentInstance;
-    await fixture.whenStable();
+    fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

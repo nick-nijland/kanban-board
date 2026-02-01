@@ -5,7 +5,7 @@ import { Card } from '../../../../shared/models/card';
 import { Status, statuses } from '../../../../shared/models/status';
 import { CdkDrag, CdkDropList, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { TranslateModule } from '@ngx-translate/core';
-import {inputBinding} from '@angular/core';
+import { inputBinding } from '@angular/core';
 
 describe('Column Component', () => {
   let fixture: ComponentFixture<Column>;
@@ -34,7 +34,7 @@ describe('Column Component', () => {
         inputBinding('status', () => mockStatus),
         inputBinding('cards', () => mockCards),
         inputBinding('connectedTo', () => mockConnectedTo),
-      ]
+      ],
     });
 
     component = fixture.componentInstance;
@@ -58,7 +58,7 @@ describe('Column Component', () => {
   });
 
   it('should return connectedTo IDs correctly', () => {
-    const expectedIds = mockConnectedTo.map(status => component.idPrefix + status);
+    const expectedIds = mockConnectedTo.map((status) => component.idPrefix + status);
     expect(component.getConnectedTo()).toEqual(expectedIds);
   });
 });

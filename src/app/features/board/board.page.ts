@@ -1,4 +1,4 @@
-import {Component, DestroyRef, inject} from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { Column } from './components/column/column';
 import { BoardStore } from './store/board.store';
 import { Status, statuses, StatusTotal } from '../../shared/models/status';
@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TicketModal } from './components/ticket-modal/ticket-modal';
 import { TranslateService } from '@ngx-translate/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-board-page',
@@ -55,19 +55,18 @@ export class BoardPage {
       data: event ?? undefined,
     });
 
-    dialogRef.afterClosed()
-      .pipe(
-        takeUntilDestroyed(this.destroyRef)
-      )
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((card: NewCard | Card) => {
-      if (card) {
-        if ('id' in card) {
-          this.store.updateCard([card]);
-        } else {
-          this.store.createCard(card);
+        if (card) {
+          if ('id' in card) {
+            this.store.updateCard([card]);
+          } else {
+            this.store.createCard(card);
+          }
         }
-      }
-    });
+      });
   }
 
   public deleteTicket(event: { card: Card }): void {

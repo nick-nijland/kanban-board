@@ -40,7 +40,7 @@ export class BoardPage {
     return this.store.statusTotals();
   }
 
-  public getStatusses(status: Status): Status[] {
+  public getStatuses(status: Status): Status[] {
     return this.statuses.filter((state) => state !== status);
   }
 

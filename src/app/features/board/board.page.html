@@ -17,7 +17,7 @@
       <app-column
         [status]="status"
         [cards]="getCardsByStatus(status)"
-        [connectedTo]="getStatusses(status)"
+        [connectedTo]="getStatuses(status)"
         (cardDropped)="dropCard($event, status)"
         (onDeleteTicket)="deleteTicket($event)"
         (onEditTicket)="openModal($event)"
